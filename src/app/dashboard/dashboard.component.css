@@ -1,0 +1,31 @@
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+nav {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+li {
+    margin: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #00438a;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}

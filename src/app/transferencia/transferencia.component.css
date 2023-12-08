@@ -1,0 +1,59 @@
+
+h2, h3 {
+    color: #333;
+    text-align: center;
+
+}
+
+h4{
+    color: #333;
+}
+
+p, h4 {
+    margin: 10px 100px;
+}
+
+ul {
+    padding: 0;
+    margin: 10px 100px;
+}
+
+li {
+    margin: 5px 0;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 100px;
+
+}
+a {
+    text-decoration: none;
+    color: #00346b;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+hr{
+    width: 350px;
+    margin: 10px 100px;
+    border: 1px solic grey;
+}
+
+label{
+    display: inline-block;
+    width: 150px;
+    margin: 3px 100px;
+}

@@ -1,0 +1,66 @@
+<div>
+    <h2>Lista de Gestores:</h2>
+    <p><a routerLink="/dashboard">Volver.</a></p>
+    <h4>Haz click en un cualquier gestor para actualizarlo.</h4>
+
+        <div *ngFor="let gestor of gestores" (click)="mostrarFormulario(gestor)">
+            <p>Id: {{ gestor.id }}</p>
+            <p>{{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
+            <ul>
+                <li>Correo: {{ gestor.email }}.</li>
+                <li>Salario: {{ gestor.salario }}€.</li>
+            </ul>
+            <button (click)="eliminarGestor(gestor.id)">Eliminar</button>
+            <hr>
+        </div>
+        <div *ngIf="formularioActualizar && gestorSeleccionado" >
+            <h3>Actualizar Gestor</h3>
+            <form (submit)="actualizarGestor()">
+                <label for="text">Nombre:</label>
+                <input type="text" [(ngModel)]="gestorSeleccionado.nombre" name="nombre" required><br>
+                <label for="text">Apellido: </label>
+                <input type="text" [(ngModel)]="gestorSeleccionado.apellido" name="apellido" required><br>
+                <label for="edad">Edad:</label>
+                <input type="number" min="18" max="100" [(ngModel)]="gestorSeleccionado.edad" name="edad" required><br>
+                <label for="email">Email: </label>
+                <input type="email" [(ngModel)]="gestorSeleccionado.email" name="email" required><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        
+    <div>
+        <h3>Agregar Gestor</h3>
+        <form (submit)="insertarGestor()">
+            <label for="text">Nombre:</label>
+            <input type="text" [(ngModel)]="nuevoGestor.nombre" name="nombre" required><br>
+            <label for="text">Apellido: </label>
+            <input type="text" [(ngModel)]="nuevoGestor.apellido" name="apellido" required><br>
+            <label for="edad">Edad:</label>
+            <input type="number" min="18" max="100" [(ngModel)]="nuevoGestor.edad" name="edad" required><br>
+            <label for="email">Email: </label>
+            <input type="email" [(ngModel)]="nuevoGestor.email" name="email" required><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <button (click)="convertirGestoresAJson()">Convertir a Json</button>
+    <div *ngIf="mostrarConvertidosAJson">
+        <button (click)="ocultarConvertidos()">Ocultar</button>
+        <p>{{ gestoresJson }}</p>
+        <button (click)="convertirDesdeJson()">Convertir desde Json</button><br>
+        <button (click)="ocultarConvertidosDesdeJson()">Ocultar</button>
+        <div *ngIf="mostrarConvertidosDesdeJson">
+            <div *ngFor="let gestor of gestores">
+                <p>Id: {{ gestor.id }}</p>
+                <p>{{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
+                <ul>
+                    <li>Correo: {{ gestor.email }}.</li>
+                    <li>Salario: {{ gestor.salario }}€.</li>
+                </ul>
+                <hr>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
