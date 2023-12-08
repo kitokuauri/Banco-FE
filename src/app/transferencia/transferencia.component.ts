@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class TransferenciaComponent implements OnInit {
 
   transferencias: Transferencia[] = [];
-  nuevaTransferencia: Transferencia = new Transferencia(0, "", "", 0);
+  nuevaTransferencia: Transferencia = new Transferencia(0, "", "", 0, new Date());
   transferenciaSeleccionada: Transferencia | null = null;
 
   transJson: string='';
@@ -36,7 +36,8 @@ export class TransferenciaComponent implements OnInit {
     this.transferenciaService.crearTransferencia(this.nuevaTransferencia).subscribe(datos =>{
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
         this.transferencias = nuevosDatos;
-        this.nuevaTransferencia = new Transferencia(0, "", "", 0);
+        this.nuevaTransferencia = new Transferencia(0, "", "", 0, new Date());
+        alert("Transferencia enviada con éxito!");
       })
     });
   }

@@ -4,5 +4,6 @@ export class Transferencia {
         public remitente: string,
         public destinatario: string,
         public cantidad: number,
+        public fecha: Date
     ) { }
 }

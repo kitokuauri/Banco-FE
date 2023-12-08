@@ -13,7 +13,7 @@ import { ConversionService } from '../conversion-json.service';
 export class MensajeComponent implements OnInit {
   
   mensajes: Mensaje[] = [];
-  nuevoMensaje: Mensaje = new Mensaje(0, "", "", "");
+  nuevoMensaje: Mensaje = new Mensaje(0, "", "", "", new Date());
   mensajeSeleccionada: Mensaje | null = null;
 
   mensJson: string='';
@@ -36,7 +36,8 @@ export class MensajeComponent implements OnInit {
     this.mensajeService.crearMensaje(this.nuevoMensaje).subscribe(datos =>{
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
         this.mensajes = nuevosDatos;
-        this.nuevoMensaje = new Mensaje(0, "", "", "");
+        this.nuevoMensaje = new Mensaje(0, "", "", "", new Date());
+        alert("¡Mensaje enviado con éxito!");
       })
     });
   }

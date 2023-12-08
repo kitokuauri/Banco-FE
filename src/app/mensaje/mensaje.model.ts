@@ -4,5 +4,6 @@ export class Mensaje {
         public remitente: string,
         public destinatario: string,
         public mensaje: String,
+        public fecha: Date
     ) { }
 }

@@ -1,41 +1,30 @@
 <div>
     <h2>Lista de Transferencias:</h2>
     <p><a routerLink="/dashboard">Volver.</a></p>
-    <h4>Haz click en un cualquier transferencia para actualizarlo.</h4>
 
     <div *ngFor="let transferencia of transferencias">
-        <p>Id: {{ transferencia.id }}</p>
-        <p>De: {{ transferencia.remitente }} - Para: {{ transferencia.destinatario }}.</p>
+        <p>De: {{ transferencia.remitente }}</p>
+        <p>Para: {{ transferencia.destinatario }}.</p>
+        <p>{{ transferencia.fecha }}</p>
         <p>Cantidad: {{ transferencia.cantidad }}€.</p>
         <button (click)="eliminarTransferencia(transferencia.id)">Eliminar</button>
         <hr>
     </div>
-
-    <div *ngIf="formularioActualizar && transferenciaSeleccionada" >
-        <h3>Actualizar Transferencia</h3>
-        <form (submit)="actualizarTransferencia()">
+    
+    <div>
+        <h3>Enviar Transferencia</h3>
+        <form (submit)="insertarTransferencia()">
             <label for="text">Remitente:</label>
-            <input type="text" [(ngModel)]="transferenciaSeleccionada.remitente" name="remitente" required><br>
+            <input type="text" [(ngModel)]="nuevaTransferencia.remitente" name="remitente" required><br>
             <label for="text">Destinatario: </label>
-            <input type="text" [(ngModel)]="transferenciaSeleccionada.destinatario" name="destinatario" required><br>
-            <label for="cantidad">Cantidad: </label>
-            <input type="number" [(ngModel)]="transferenciaSeleccionada.cantidad" name="cantidad" required><br>
+            <input type="text" [(ngModel)]="nuevaTransferencia.destinatario" name="destinatario" required><br>
+            <label for="fecha">Fecha:</label>
+            <input type="date" [(ngModel)]="nuevaTransferencia.fecha" name="fecha" required>
+            <label for="mensaje">Cantidad: </label>
+            <input type="number" [(ngModel)]="nuevaTransferencia.cantidad" name="cantidad" required><br>
             <button type="submit">Enviar</button>
         </form>
     </div>
-    
-<div>
-    <h3>Agregar Transferencia</h3>
-    <form (submit)="insertarTransferencia()">
-        <label for="text">Remitente:</label>
-        <input type="text" [(ngModel)]="nuevaTransferencia.remitente" name="remitente" required><br>
-        <label for="text">Destinatario: </label>
-        <input type="text" [(ngModel)]="nuevaTransferencia.destinatario" name="destinatario" required><br>
-        <label for="mensaje">Cantidad: </label>
-        <input type="number" [(ngModel)]="nuevaTransferencia.cantidad" name="cantidad" required><br>
-        <button type="submit">Enviar</button>
-    </form>
-</div>
 
     <button (click)="convertirTransAJson()">Convertir a Json</button>
     <div *ngIf="mostrarConvertidosAJson">
@@ -46,7 +35,9 @@
         <div *ngIf="mostrarConvertidosDesdeJson">
             <div *ngFor="let transferencia of transferencias">
                 <p>Id: {{ transferencia.id }}</p>
-                <p>De: {{ transferencia.remitente }} - Para: {{ transferencia.destinatario }}.</p>
+                <p>De: {{ transferencia.remitente }}</p>
+                <p>Para: {{ transferencia.destinatario }}.</p>
+                <p>{{ transferencia.fecha }}</p>
                 <p>Cantidad: {{ transferencia.cantidad }}€.</p>
                 <hr>
             </div>

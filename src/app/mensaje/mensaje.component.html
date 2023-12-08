@@ -1,41 +1,30 @@
 <div>
     <h2>Lista de Mensajes:</h2>
     <p><a routerLink="/dashboard">Volver.</a></p>
-    <h4>Haz click en un cualquier mensaje para actualizarlo.</h4>
-
     <div *ngFor="let mensaje of mensajes" (click)="mostrarFormulario(mensaje)">
         <p>Id: {{ mensaje.id }}</p>
-        <p>De: {{ mensaje.remitente }} - Para: {{ mensaje.destinatario }}.</p>
+        <p>De: {{ mensaje.remitente }}</p>
+        <p>Para: {{ mensaje.destinatario }}.</p>
+        <p>{{ mensaje.fecha }}</p>
         <p>Mensaje: {{ mensaje.mensaje }}.</p>
         <button (click)="eliminarMensaje(mensaje.id)">Eliminar</button>
         <hr>
     </div>
-
-    <div *ngIf="formularioActualizar && mensajeSeleccionada" >
-        <h3>Actualizar Gestor</h3>
-        <form (submit)="actualizarMensaje()">
+    
+    <div>
+        <h3>Enviar Mensaje</h3>
+        <form (submit)="insertarMensaje()">
             <label for="text">Remitente:</label>
-            <input type="text" [(ngModel)]="mensajeSeleccionada.remitente" name="remitente" required><br>
+            <input type="text" [(ngModel)]="nuevoMensaje.remitente" name="remitente" required><br>
             <label for="text">Destinatario: </label>
-            <input type="text" [(ngModel)]="mensajeSeleccionada.destinatario" name="destinatario" required><br>
+            <input type="text" [(ngModel)]="nuevoMensaje.destinatario" name="destinatario" required><br>
+            <label for="fecha">Fecha:</label>
+            <input type="date" [(ngModel)]="nuevoMensaje.fecha" name="fecha" required>
             <label for="mensaje">Mensaje: </label>
-            <input type="email" [(ngModel)]="mensajeSeleccionada.mensaje" name="mensaje" required><br>
+            <textarea cols="30" rows="10" [(ngModel)]="nuevoMensaje.mensaje" name="mensaje" required></textarea><br>
             <button type="submit">Enviar</button>
         </form>
     </div>
-    
-<div>
-    <h3>Agregar Mensaje</h3>
-    <form (submit)="insertarMensaje()">
-        <label for="text">Remitente:</label>
-        <input type="text" [(ngModel)]="nuevoMensaje.remitente" name="remitente" required><br>
-        <label for="text">Destinatario: </label>
-        <input type="text" [(ngModel)]="nuevoMensaje.destinatario" name="destinatario" required><br>
-        <label for="mensaje">Mensaje: </label>
-        <textarea cols="30" rows="10" [(ngModel)]="nuevoMensaje.mensaje" name="mensaje" required></textarea><br>
-        <button type="submit">Enviar</button>
-    </form>
-</div>
 
 
     <button (click)="convertirMensajesAJson()">Convertir a Json</button>
@@ -47,7 +36,9 @@
         <div *ngIf="mostrarConvertidosDesdeJson">
             <div *ngFor="let mensaje of mensajes">
                 <p>Id: {{ mensaje.id }}</p>
-                <p>De: {{ mensaje.remitente }} - Para: {{ mensaje.destinatario }}.</p>
+                <p>De: {{ mensaje.remitente }}</p>
+                <p>Para: {{ mensaje.destinatario }}.</p>
+                <p>{{ mensaje.fecha }}</p>
                 <p>Mensaje: {{ mensaje.mensaje }}.</p>
                 <hr>
             </div>
