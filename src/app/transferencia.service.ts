@@ -34,4 +34,16 @@ export class TransferenciaService {
     this.transferenciasSubject.next();
   }
 
+  obtenerTransferenciaPorId(id: number): Observable<Transferencia[]>{
+    return this.http.get<Transferencia[]>(`${this.apiUrl}/${id}`);
+  }
+
+  obtenerTransferenciaPorRemitente(remitente: String): Observable<Transferencia[]>{
+    return this.http.get<Transferencia[]>(`${this.apiUrl}/query?remitente=${remitente}`);
+  }
+
+  obtenerTransferenciaPorDestinatario(destinatario: String): Observable<Transferencia[]>{
+    return this.http.get<Transferencia[]>(`${this.apiUrl}/query?destinatario=${destinatario}`);
+  }
+
 }

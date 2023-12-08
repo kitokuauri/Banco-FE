@@ -34,5 +34,17 @@ export class MensajeService {
     this.mensajesSubject.next();
   }
 
+  obtenerMensajePorId(id: number): Observable<Mensaje[]>{
+    return this.http.get<Mensaje[]>(`${this.apiUrl}/${id}`);
+  }
+
+  obtenerMensajePorRemitente(remitente: String): Observable<Mensaje[]>{
+    return this.http.get<Mensaje[]>(`${this.apiUrl}/query?remitente=${remitente}`);
+  }
+
+  obtenerMensajePorDestinatario(destinatario: String): Observable<Mensaje[]>{
+    return this.http.get<Mensaje[]>(`${this.apiUrl}/query?destinatario=${destinatario}`);
+  }
+
 
 }

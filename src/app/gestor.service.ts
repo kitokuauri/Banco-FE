@@ -34,5 +34,13 @@ export class GestorService {
     this.gestoresSubject.next();
   }
 
+  obtenerGestorPorId(id: number): Observable<Gestor[]>{
+    return this.http.get<Gestor[]>(`${this.apiUrl}/${id}`);
+  }
+
+  obtenerGestorPorNombre(nombre: String): Observable<Gestor[]>{
+    return this.http.get<Gestor[]>(`${this.apiUrl}/query?nombre=${nombre}`);
+  }
+
 
 }

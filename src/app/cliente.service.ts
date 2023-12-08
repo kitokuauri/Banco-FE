@@ -40,7 +40,7 @@ export class ClienteService {
   }
 
   obtenerClientePorNombre(nombre: String): Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(`${this.apiUrl}/${query}`);
+    return this.http.get<Cliente[]>(`${this.apiUrl}/query?nombre=${nombre}`);
   }
 
 }

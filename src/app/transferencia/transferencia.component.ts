@@ -32,6 +32,27 @@ export class TransferenciaComponent implements OnInit {
     })
   }
 
+  obtenerPorId(id: number){
+    this.transferenciaService.obtenerTransferenciaPorId(id).subscribe(datos =>{
+      console.log(datos);
+      this.transferencias = datos;
+    })
+  }
+
+  obtenerPorRemitente(remitente: String){
+    this.transferenciaService.obtenerTransferenciaPorRemitente(remitente).subscribe(datos =>{
+      console.log(datos);
+      this.transferencias = datos;
+    })
+  }
+
+  obtenerPorDestinatario(destinatario: String){
+    this.transferenciaService.obtenerTransferenciaPorDestinatario(destinatario).subscribe(datos =>{
+      console.log(datos);
+      this.transferencias = datos;
+    })
+  }
+
   insertarTransferencia(){
     this.transferenciaService.crearTransferencia(this.nuevaTransferencia).subscribe(datos =>{
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
