@@ -29,3 +29,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.search{
+    width: 60%;
+    padding: 5px;
+    margin-left: 20%;
+    margin-bottom: 20px;
+}
+
+::placeholder{
+    text-align: center;
+}

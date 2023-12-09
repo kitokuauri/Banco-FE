@@ -1,4 +1,15 @@
 <h1>Bienvenido al Banco</h1>
+
+<div class="box">
+    <div class="search-bar">
+        <input type="text" class="search" placeholder="Busca entre Gestores, Clientes, Mensajes y Transferencias." (keyup)="onSearchKeyUp($event)">
+    </div>
+    <ul class="lista">
+        <li *ngFor="let item of listaFiltrada">
+            {{ item.nombre || item.remitente || item.destinatario }}
+        </li>
+    </ul>
+</div>
 <nav>
     <ul>
         <li><a routerLink="/gestores">Gestores</a></li>

@@ -5,11 +5,9 @@
 
         <div *ngFor="let gestor of gestores" (click)="mostrarFormulario(gestor)">
             <p>Id: {{ gestor.id }}</p>
-            <p>{{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
-            <ul>
-                <li>Correo: {{ gestor.email }}.</li>
-                <li>Salario: {{ gestor.salario }}€.</li>
-            </ul>
+            <p><u>Gestor</u>: {{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
+            <p>Correo: {{ gestor.email }}.</p>
+            <p>Salario: {{ gestor.salario }}€.</p>     
             <button (click)="eliminarGestor(gestor.id)">Eliminar</button>
             <hr>
         </div>
@@ -52,11 +50,9 @@
         <div *ngIf="mostrarConvertidosDesdeJson">
             <div *ngFor="let gestor of gestores">
                 <p>Id: {{ gestor.id }}</p>
-                <p>{{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
-                <ul>
-                    <li>Correo: {{ gestor.email }}.</li>
-                    <li>Salario: {{ gestor.salario }}€.</li>
-                </ul>
+                <p><u>Gestor</u>: {{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
+                <p>Correo: {{ gestor.email }}.</p>
+                <p>Salario: {{ gestor.salario }}€.</p>     
                 <hr>
             </div>
         </div>
