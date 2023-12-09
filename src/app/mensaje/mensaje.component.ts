@@ -18,7 +18,7 @@ export class MensajeComponent implements OnInit {
   
   mensajes: Mensaje[] = [];
   clientes: Cliente[] = [];
-  nuevoMensaje: Mensaje = new Mensaje(0, 0, 0, "", "", "", new Date());
+  nuevoMensaje: Mensaje = new Mensaje(0, {} as any, {} as any, "", "", "", new Date());
   mensajeSeleccionada: Mensaje | null = null;
 
   formularioActualizar=false;
@@ -40,7 +40,7 @@ export class MensajeComponent implements OnInit {
     this.mensajeService.crearMensaje(this.nuevoMensaje).subscribe(datos =>{
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
         this.mensajes = nuevosDatos;
-        this.nuevoMensaje = new Mensaje(0, 0, 0, "", "", "", new Date());
+        this.nuevoMensaje = new Mensaje(0, {} as any, {} as any, "", "", "", new Date());
         alert("¡Mensaje enviado con éxito!");
       })
     });
@@ -63,27 +63,6 @@ export class MensajeComponent implements OnInit {
     })
   }
 
-  actualizarMensaje(): void {
-    if (this.mensajeSeleccionada) {
-      const cambios = {
-        remitente: this.mensajeSeleccionada?.remitente,
-        destinatario: this.mensajeSeleccionada?.destinatario,
-        cantidad: this.mensajeSeleccionada?.mensaje,
-      };
-  
-      this.mensajeService.actualizarMensaje(this.mensajeSeleccionada?.id || 0, cambios).subscribe(gestorActualizado => {
-        console.log("Mensaje actualizado: ", gestorActualizado);
-  
-        this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
-          this.mensajes = nuevosDatos;
-          this.formularioActualizar = false;
-        });
-      },
-      error => {
-        console.error("Error al actualizar el mensaje: ", error);
-      });
-    }
-  }
 
   mostrarFormulario(mensaje: Mensaje): void{  
     this.formularioActualizar=true;

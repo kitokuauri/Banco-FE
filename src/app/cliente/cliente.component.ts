@@ -17,7 +17,7 @@ export class ClienteComponent implements OnInit {
   
   clientes: Cliente[] = [];
   gestores: Gestor[] = [];
-  nuevoCliente: Cliente = new Cliente(0, 0, "", "", "");
+  nuevoCliente: Cliente = new Cliente(0, {} as any, "", "", "");
   clienteSeleccionado: Cliente | null = null;
 
   formularioActualizar=false;
@@ -39,7 +39,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.crearCliente(this.nuevoCliente).subscribe(datos =>{
       this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
         this.clientes = nuevosDatos;
-        this.nuevoCliente = new Cliente(0, 0, "", "", "");
+        this.nuevoCliente = new Cliente(0, {} as any, "", "", "");
       })
     });
   }
@@ -67,18 +67,19 @@ export class ClienteComponent implements OnInit {
         nombre: this.clienteSeleccionado?.nombre,
         apellido: this.clienteSeleccionado?.apellido,
         email: this.clienteSeleccionado?.email,
+        id_gestor: {
+          id: this.clienteSeleccionado?.id_gestor.id
+        }
       };
   
       this.clienteService.actualizarCliente(this.clienteSeleccionado?.id || 0, cambios).subscribe(gestorActualizado => {
-        console.log("Cliente actualizado: ", gestorActualizado);
-  
         this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
           this.clientes = nuevosDatos;
           this.formularioActualizar = false;
         });
       },
       error => {
-        console.error("Error al actualizar el cliente: ", error);
+        console.error("Error al actualizar el cliente", error);
       });
     }
   }
