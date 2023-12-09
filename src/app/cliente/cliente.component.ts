@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from './cliente.model';
 import { HttpClient } from '@angular/common/http';
+import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ConversionService } from '../conversion-json.service';
 
@@ -22,7 +24,7 @@ export class ClienteComponent implements OnInit {
 
   formularioActualizar=false;
 
-  constructor( private http: HttpClient, private clienteService: ClienteService, private conversionService: ConversionService) {}
+  constructor( private http: HttpClient, private clienteService: ClienteService, private conversionService: ConversionService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.clienteService.obtenerClientes().subscribe(datos =>{
@@ -32,7 +34,7 @@ export class ClienteComponent implements OnInit {
     })
   }
 
-  insertarCliente(){
+  insertarCliente(): void{
     this.clienteService.crearCliente(this.nuevoCliente).subscribe(datos =>{
       this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
         this.clientes = nuevosDatos;
@@ -41,12 +43,20 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  eliminarCliente(id: number){
-    this.clienteService.eliminarCliente(id).subscribe(()=>{
-      this.clienteService.notificarEliminacion();
-      this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
-        this.clientes = nuevosDatos;
-      })
+  eliminarCliente(id: number): void{
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      panelClass: 'dialogo',
+      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un cliente? Los datos no se podrán recuperar.' }
+    });
+    dialogRef.afterClosed().subscribe(resultado =>{
+      if(resultado){
+        this.clienteService.eliminarCliente(id).subscribe(()=>{
+          this.clienteService.notificarEliminacion();
+          this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
+            this.clientes = nuevosDatos;
+          })
+        })
+      }
     })
   }
 
@@ -76,6 +86,10 @@ export class ClienteComponent implements OnInit {
   mostrarFormulario(cliente: Cliente): void{  
     this.formularioActualizar=true;
     this.clienteSeleccionado = cliente;
+  }
+
+  ocultarFormulario(cliente: Cliente): void{
+    this.formularioActualizar=false;
   }
 
   convertirDesdeJson(): void {

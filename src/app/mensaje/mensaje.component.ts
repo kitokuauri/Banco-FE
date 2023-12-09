@@ -32,7 +32,7 @@ export class MensajeComponent implements OnInit {
     })
   }
 
-  insertarMensaje(){
+  insertarMensaje(): void{
     this.mensajeService.crearMensaje(this.nuevoMensaje).subscribe(datos =>{
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
         this.mensajes = nuevosDatos;
@@ -42,7 +42,7 @@ export class MensajeComponent implements OnInit {
     });
   }
 
-  eliminarMensaje(id: number){
+  eliminarMensaje(id: number): void{
     this.mensajeService.eliminarMensaje(id).subscribe(()=>{
       this.mensajeService.notificarEliminacion();
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {

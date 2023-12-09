@@ -16,6 +16,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+
 
 @NgModule({
   declarations: [
@@ -24,14 +29,18 @@ import { NgStyle } from '@angular/common';
     ClienteComponent,
     MensajeComponent,
     TransferenciaComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConfirmacionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgStyle
+    NgStyle,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     GestorService,

@@ -32,28 +32,28 @@ export class TransferenciaComponent implements OnInit {
     })
   }
 
-  obtenerPorId(id: number){
+  obtenerPorId(id: number): void{
     this.transferenciaService.obtenerTransferenciaPorId(id).subscribe(datos =>{
       console.log(datos);
       this.transferencias = datos;
     })
   }
 
-  obtenerPorRemitente(remitente: String){
+  obtenerPorRemitente(remitente: String): void{
     this.transferenciaService.obtenerTransferenciaPorRemitente(remitente).subscribe(datos =>{
       console.log(datos);
       this.transferencias = datos;
     })
   }
 
-  obtenerPorDestinatario(destinatario: String){
+  obtenerPorDestinatario(destinatario: String): void{
     this.transferenciaService.obtenerTransferenciaPorDestinatario(destinatario).subscribe(datos =>{
       console.log(datos);
       this.transferencias = datos;
     })
   }
 
-  insertarTransferencia(){
+  insertarTransferencia(): void{
     this.transferenciaService.crearTransferencia(this.nuevaTransferencia).subscribe(datos =>{
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
         this.transferencias = nuevosDatos;
@@ -63,7 +63,8 @@ export class TransferenciaComponent implements OnInit {
     });
   }
 
-  eliminarTransferencia(id: number){
+  eliminarTransferencia(id: number): void{
+    
     this.transferenciaService.eliminarTransferencia(id).subscribe(()=>{
       this.transferenciaService.notificarEliminacion();
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {

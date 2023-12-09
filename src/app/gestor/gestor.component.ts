@@ -34,7 +34,7 @@ export class GestorComponent implements OnInit {
     })
   }
 
-  insertarGestor(){
+  insertarGestor(): void{
     this.gestorService.crearGestor(this.nuevoGestor).subscribe(datos =>{
       this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
         this.gestores = nuevosDatos;
@@ -43,7 +43,7 @@ export class GestorComponent implements OnInit {
     });
   }
 
-  eliminarGestor(id: number){
+  eliminarGestor(id: number): void{
     this.gestorService.eliminarGestor(id).subscribe(()=>{
       this.gestorService.notificarEliminacion();
       this.gestorService.obtenerGestores().subscribe(nuevosDatos => {

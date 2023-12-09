@@ -48,8 +48,7 @@ button:hover {
 
 hr{
     width: 350px;
-    margin: 10px 100px;
-    border: 1px solic grey;
+    margin: 10px 100px;    border: 1px solid grey;
 }
 
 label{
