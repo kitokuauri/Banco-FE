@@ -19,7 +19,20 @@ export class MensajeService {
   }
 
   crearMensaje(mensaje: Mensaje): Observable<Mensaje> {
-    return this.http.post<Mensaje>(this.apiUrl, mensaje);
+    let nuevoMensaje = {
+      id: mensaje.id,
+      remitente: mensaje.remitente,
+      destinatario: mensaje.destinatario,
+      fecha: mensaje.fecha,
+      mensaje: mensaje.mensaje,
+      id_remitente: {
+        id: mensaje.id_remitente
+      },
+      id_destinatario: {
+        id: mensaje.id_destinatario
+      }
+    };
+    return this.http.post<Mensaje>(this.apiUrl, nuevoMensaje);
   }
 
   actualizarMensaje(id: number, cambios: any): Observable<Mensaje> {

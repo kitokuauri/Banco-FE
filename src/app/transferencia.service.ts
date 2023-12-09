@@ -19,7 +19,21 @@ export class TransferenciaService {
   }
 
   crearTransferencia(transferencia: Transferencia): Observable<Transferencia> {
-    return this.http.post<Transferencia>(this.apiUrl, transferencia);
+    let nuevaTransferencia = {
+      id: transferencia.id,
+      remitente: transferencia.remitente,
+      destinatario: transferencia.destinatario,
+      fecha: transferencia.fecha,
+      cantidad: transferencia.cantidad,
+      mensaje: transferencia.mensaje,
+      id_remitente: {
+        id: transferencia.id_remitente
+      },
+      id_destinatario: {
+        id: transferencia.id_destinatario
+      }
+    };
+    return this.http.post<Transferencia>(this.apiUrl, nuevaTransferencia);
   }
 
   actualizarTransferencia(id: number, cambios: any): Observable<Transferencia> {

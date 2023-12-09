@@ -1,18 +1,47 @@
+<nav>
+    <div class="ul">
+        <!-- fa-w (deja un espacio entre icono y texto) -->
+        <button class="link"><a routerLink=""><i class="fa-solid fa-home fa-fw"></i> Home</a></button>
+        <button class="link"><a  routerLink="/gestores"><i class="fa-solid fa-lemon fa-fw"></i>Gestores</a></button>
+        <button class="link"><a  routerLink="/clientes"><i class="fa-solid fa-user fa-fw"></i>Clientes</a></button>
+        <button class="link"><a  routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
+        <button class="link"><a  routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
+    </div>
+</nav>
+<h2>Lista de Gestores</h2>
 <div>
-    <h2>Lista de Gestores:</h2>
-    <p><a routerLink="/dashboard">Volver.</a></p>
-    <h4>Haz click en un cualquier gestor para actualizarlo.</h4>
-
-        <div *ngFor="let gestor of gestores" (click)="mostrarFormulario(gestor)">
-            <p>Id: {{ gestor.id }}</p>
-            <p><u>Gestor</u>: {{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
-            <p>Correo: {{ gestor.email }}.</p>
-            <p>Salario: {{ gestor.salario }}€.</p>     
-            <button (click)="eliminarGestor(gestor.id)">Eliminar</button>
-            <hr>
-        </div>
+    <table>
+        <thead>
+            <tr>
+                <!-- th columna de cabecera -->
+                <th></th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Correo</th>
+                <th>Salario</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let gestor of gestores">
+                <td><i class="fa-solid fa-lemon"></i></td>
+                <!-- td columna normal -->
+                <td>{{ gestor.id}}</td>
+                <td>{{ gestor.nombre }} {{ gestor.apellido }}</td>
+                <td>{{ gestor.edad }}</td>
+                <td><a href="mailto:{{ gestor.email }}">{{ gestor.email }}</a></td>
+                <td>{{ gestor.salario }}€</td>
+                <td>
+                    <button class="boton" (click)="mostrarFormulario(gestor)">Modificar</button>
+                    <button class="boton" (click)="eliminarGestor(gestor.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
         <div *ngIf="formularioActualizar && gestorSeleccionado" >
-            <h3>Actualizar Gestor</h3>
+            <h3>Modificar Gestor</h3>
             <form (submit)="actualizarGestor()">
                 <label for="text">Nombre:</label>
                 <input type="text" [(ngModel)]="gestorSeleccionado.nombre" name="nombre" required><br>
@@ -22,7 +51,8 @@
                 <input type="number" min="18" max="100" [(ngModel)]="gestorSeleccionado.edad" name="edad" required><br>
                 <label for="email">Email: </label>
                 <input type="email" [(ngModel)]="gestorSeleccionado.email" name="email" required><br>
-                <button type="submit">Enviar</button>
+                <button class="boton" type="submit">Enviar</button>
+                <button class="boton" (click)="ocultarFormulario()">Cancelar</button>
             </form>
         </div>
         
@@ -37,25 +67,8 @@
             <input type="number" min="18" max="100" [(ngModel)]="nuevoGestor.edad" name="edad" required><br>
             <label for="email">Email: </label>
             <input type="email" [(ngModel)]="nuevoGestor.email" name="email" required><br>
-            <button type="submit">Enviar</button>
+            <button class="boton" type="submit">Enviar</button>
         </form>
-    </div>
-
-    <button (click)="convertirGestoresAJson()">Convertir a Json</button>
-    <div *ngIf="mostrarConvertidosAJson">
-        <button (click)="ocultarConvertidos()">Ocultar</button>
-        <p>{{ gestoresJson }}</p>
-        <button (click)="convertirDesdeJson()">Convertir desde Json</button><br>
-        <button (click)="ocultarConvertidosDesdeJson()">Ocultar</button>
-        <div *ngIf="mostrarConvertidosDesdeJson">
-            <div *ngFor="let gestor of gestores">
-                <p>Id: {{ gestor.id }}</p>
-                <p><u>Gestor</u>: {{ gestor.nombre }} {{ gestor.apellido }} - Edad: {{ gestor.edad }} años.</p>
-                <p>Correo: {{ gestor.email }}.</p>
-                <p>Salario: {{ gestor.salario }}€.</p>     
-                <hr>
-            </div>
-        </div>
     </div>
     
 </div>

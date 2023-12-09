@@ -4,8 +4,9 @@ import { Cliente } from './cliente.model';
 import { HttpClient } from '@angular/common/http';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Gestor } from '../gestor/gestor.model';
+import { GestorService } from '../gestor.service';
 
-import { ConversionService } from '../conversion-json.service';
 
 @Component({
   selector: 'app-cliente',
@@ -15,22 +16,22 @@ import { ConversionService } from '../conversion-json.service';
 export class ClienteComponent implements OnInit {
   
   clientes: Cliente[] = [];
-  nuevoCliente: Cliente = new Cliente(0, "", "", 18, "");
+  gestores: Gestor[] = [];
+  nuevoCliente: Cliente = new Cliente(0, 0, "", "", "");
   clienteSeleccionado: Cliente | null = null;
-
-  clientesJson: string='';
-  mostrarConvertidosAJson=false;
-  mostrarConvertidosDesdeJson=false;
 
   formularioActualizar=false;
 
-  constructor( private http: HttpClient, private clienteService: ClienteService, private conversionService: ConversionService, private dialog: MatDialog) {}
+  constructor( private gestorService: GestorService, private http: HttpClient, private clienteService: ClienteService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.clienteService.obtenerClientes().subscribe(datos =>{
       console.log(datos);
       this.clientes = datos;
       this.clienteSeleccionado= null;
+    });
+    this.gestorService.obtenerGestores().subscribe(datos =>{
+      this.gestores = datos;
     })
   }
 
@@ -38,7 +39,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.crearCliente(this.nuevoCliente).subscribe(datos =>{
       this.clienteService.obtenerClientes().subscribe(nuevosDatos => {
         this.clientes = nuevosDatos;
-        this.nuevoCliente = new Cliente(0, "", "", 18, "");
+        this.nuevoCliente = new Cliente(0, 0, "", "", "");
       })
     });
   }
@@ -65,7 +66,6 @@ export class ClienteComponent implements OnInit {
       const cambios = {
         nombre: this.clienteSeleccionado?.nombre,
         apellido: this.clienteSeleccionado?.apellido,
-        edad: this.clienteSeleccionado?.edad,
         email: this.clienteSeleccionado?.email,
       };
   
@@ -88,31 +88,10 @@ export class ClienteComponent implements OnInit {
     this.clienteSeleccionado = cliente;
   }
 
-  ocultarFormulario(cliente: Cliente): void{
+  ocultarFormulario(): void{
     this.formularioActualizar=false;
   }
 
-  convertirDesdeJson(): void {
-    if (this.clientesJson) {
-      const arrayGest: Cliente[] = this.conversionService.convertirDesdeJson(this.clientesJson);
-      this.clientes = arrayGest;
-      this.mostrarConvertidosDesdeJson = true;
-    }
-  }
-
-  convertirClientesAJson(): void {
-      this.clientesJson = this.conversionService.convertirClientesAJson(this.clientes);
-      this.mostrarConvertidosAJson = true;
-  }
-
-  ocultarConvertidos(): void {
-    this.mostrarConvertidosAJson=false;
-    this.mostrarConvertidosDesdeJson = false;
-  }
-
-  ocultarConvertidosDesdeJson(): void {
-    this.mostrarConvertidosDesdeJson = false;
-  }
 
 }
 

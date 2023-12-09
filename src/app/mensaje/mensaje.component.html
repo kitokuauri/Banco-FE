@@ -1,48 +1,73 @@
-<div>
-    <h2>Lista de Mensajes:</h2>
-    <p><a routerLink="/dashboard">Volver.</a></p>
-    <div *ngFor="let mensaje of mensajes" (click)="mostrarFormulario(mensaje)">
-        <p>Id: {{ mensaje.id }}</p>
-        <p>De: {{ mensaje.remitente }}</p>
-        <p>Para: {{ mensaje.destinatario }}.</p>
-        <p>{{ mensaje.fecha }}</p>
-        <p>Mensaje: {{ mensaje.mensaje }}.</p>
-        <button (click)="eliminarMensaje(mensaje.id)">Eliminar</button>
-        <hr>
+<nav>
+    <div class="ul">
+        <!-- fa-w (deja un espacio entre icono y texto) -->
+        <button class="link"><a routerLink=""><i class="fa-solid fa-home fa-fw"></i> Home</a></button>
+        <button class="link"><a  routerLink="/gestores"><i class="fa-solid fa-lemon fa-fw"></i>Gestores</a></button>
+        <button class="link"><a  routerLink="/clientes"><i class="fa-solid fa-user fa-fw"></i>Clientes</a></button>
+        <button class="link"><a  routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
+        <button class="link"><a  routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
     </div>
+</nav>
+<h2>Lista de Mensajes</h2>
+<div>
+    <table>
+        <thead>
+            
+            <tr>
+                <!-- th columna de cabecera -->
+                <th></th>
+                <th>Id</th>
+                <th>Remitente</th>
+                <th>Destinatario</th>
+                <th>Fecha</th>
+                <th>Mensaje</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mensaje of mensajes">
+                <td><i class="fa-solid fa-comment"></i></td>
+                <!-- td columna normal -->
+                <td>{{ mensaje.id}}</td>
+                <td>{{ mensaje.remitente }}</td>
+                <td>{{ mensaje.destinatario }}</td>
+                <td>{{ mensaje.fecha }}</td>
+                <td>{{ mensaje.mensaje }}</td>
+                <td>
+                    <button class="boton" (click)="eliminarMensaje(mensaje.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     
     <div>
         <h3>Enviar Mensaje</h3>
         <form (submit)="insertarMensaje()">
             <label for="text">Remitente:</label>
             <input type="text" [(ngModel)]="nuevoMensaje.remitente" name="remitente" required><br>
+            <label for="id_remitente"></label>
+            <select name="id_remitente" [(ngModel)]="nuevoMensaje.id_remitente" name="id_gestor">
+                <option selected disabled value="0">Seleccione una opción:</option>
+                <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">
+                    {{ cliente.nombre }}
+                </option>
+            </select><br>
             <label for="text">Destinatario: </label>
             <input type="text" [(ngModel)]="nuevoMensaje.destinatario" name="destinatario" required><br>
+            <label for="id_destinatario"></label>
+            <select name="id_destinatario" [(ngModel)]="nuevoMensaje.id_destinatario" name="id_gestor">
+                <option selected disabled value="0">Seleccione una opción:</option>
+                <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">
+                    {{ cliente.nombre }}
+                </option>
+            </select><br>
             <label for="fecha">Fecha:</label>
-            <input type="date" [(ngModel)]="nuevoMensaje.fecha" name="fecha" required><br>
+            <input class="fecha" type="date" [(ngModel)]="nuevoMensaje.fecha" name="fecha" required><br>
             <label for="mensaje">Mensaje: </label>
             <textarea cols="30" rows="10" [(ngModel)]="nuevoMensaje.mensaje" name="mensaje" required></textarea><br>
-            <button type="submit">Enviar</button>
+            <button class="boton" type="submit">Enviar</button>
         </form>
     </div>
 
-
-    <button (click)="convertirMensajesAJson()">Convertir a Json</button>
-    <div *ngIf="mostrarConvertidosAJson">
-        <button (click)="ocultarConvertidos()">Ocultar</button>
-        <p>{{ mensJson }}</p>
-        <button (click)="convertirDesdeJson()">Convertir desde Json</button><br>
-        <button (click)="ocultarConvertidosDesdeJson()">Ocultar</button>
-        <div *ngIf="mostrarConvertidosDesdeJson">
-            <div *ngFor="let mensaje of mensajes">
-                <p>Id: {{ mensaje.id }}</p>
-                <p>De: {{ mensaje.remitente }}</p>
-                <p>Para: {{ mensaje.destinatario }}.</p>
-                <p>{{ mensaje.fecha }}</p>
-                <p>Mensaje: {{ mensaje.mensaje }}.</p>
-                <hr>
-            </div>
-        </div>
-    </div>
 </div>
 

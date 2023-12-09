@@ -4,8 +4,10 @@ import { Mensaje } from './mensaje.model';
 import { HttpClient } from '@angular/common/http';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cliente/cliente.model';
 
-import { ConversionService } from '../conversion-json.service';
+
 
 @Component({
   selector: 'app-mensaje',
@@ -15,22 +17,22 @@ import { ConversionService } from '../conversion-json.service';
 export class MensajeComponent implements OnInit {
   
   mensajes: Mensaje[] = [];
-  nuevoMensaje: Mensaje = new Mensaje(0, "", "", "", new Date());
+  clientes: Cliente[] = [];
+  nuevoMensaje: Mensaje = new Mensaje(0, 0, 0, "", "", "", new Date());
   mensajeSeleccionada: Mensaje | null = null;
-
-  mensJson: string='';
-  mostrarConvertidosAJson=false;
-  mostrarConvertidosDesdeJson=false;
 
   formularioActualizar=false;
 
-  constructor(private http: HttpClient, private mensajeService: MensajeService, private conversionService: ConversionService, private dialog: MatDialog) {}
+  constructor( private clienteService: ClienteService , private http: HttpClient, private mensajeService: MensajeService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.mensajeService.obtenerMensajes().subscribe(datos =>{
       console.log(datos);
       this.mensajes = datos;
       this.mensajeSeleccionada= null;
+    });
+    this.clienteService.obtenerClientes().subscribe(datos =>{
+      this.clientes = datos;
     })
   }
 
@@ -38,7 +40,7 @@ export class MensajeComponent implements OnInit {
     this.mensajeService.crearMensaje(this.nuevoMensaje).subscribe(datos =>{
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
         this.mensajes = nuevosDatos;
-        this.nuevoMensaje = new Mensaje(0, "", "", "", new Date());
+        this.nuevoMensaje = new Mensaje(0, 0, 0, "", "", "", new Date());
         alert("¡Mensaje enviado con éxito!");
       })
     });
@@ -86,30 +88,6 @@ export class MensajeComponent implements OnInit {
   mostrarFormulario(mensaje: Mensaje): void{  
     this.formularioActualizar=true;
     this.mensajeSeleccionada = mensaje;
-  }
-
-  convertirDesdeJson(): void {
-    if (this.mensJson) {
-      const arrayGest: Mensaje[] = this.conversionService.convertirDesdeJson(this.mensJson);
-      this.mensajes = arrayGest;
-      this.mostrarConvertidosDesdeJson = true;
-    }
-  }
-
-  convertirMensajesAJson(): void {
-    if (this.mensajes.length > 0) {
-      this.mensJson = this.conversionService.convertirMensajesAJson(this.mensajes);
-      this.mostrarConvertidosAJson=true;
-    }
-  }
-
-  ocultarConvertidos(): void {
-    this.mostrarConvertidosAJson=false;
-    this.mostrarConvertidosDesdeJson = false;
-  }
-
-  ocultarConvertidosDesdeJson(): void {
-    this.mostrarConvertidosDesdeJson = false;
   }
 
 }

@@ -1,42 +1,16 @@
 h1 {
-    color: #333;
+    color: #4a1c73;
     text-align: center;
 }
-
-nav {
-    background-color: #f2f2f2;
-    padding: 10px;
+#logo {
+    width: 187px;
+    height: 167px;
+    margin: 0 auto 0 45%;
+}
+#lemon {
+    font-family: shrikhand;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
 
-li {
-    margin: 0 15px;
-}
 
-a {
-    text-decoration: none;
-    color: #00438a;
-    font-weight: bold;
-}
 
-a:hover {
-    text-decoration: underline;
-}
-
-.search{
-    width: 60%;
-    padding: 5px;
-    margin-left: 20%;
-    margin-bottom: 20px;
-}
-
-::placeholder{
-    text-align: center;
-}

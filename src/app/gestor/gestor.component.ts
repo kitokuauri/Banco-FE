@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GestorService } from '../gestor.service';
 import { Gestor } from './gestor.model';
-import { ConversionService } from '../conversion-json.service';
 import { HttpClient } from '@angular/common/http';
 import { subscribeOn } from 'rxjs';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
@@ -20,13 +19,9 @@ export class GestorComponent implements OnInit {
   nuevoGestor: Gestor = new Gestor(0, "", "", 18, "", 1200);
   gestorSeleccionado: Gestor | null = null;
 
-  gestoresJson: string='';
-  mostrarConvertidosAJson=false;
-  mostrarConvertidosDesdeJson=false;
-
   formularioActualizar=false;
 
-  constructor(private gestorService: GestorService, private conversionService: ConversionService, private http: HttpClient, private dialog: MatDialog) {}
+  constructor(private gestorService: GestorService, private http: HttpClient, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gestorService.obtenerGestores().subscribe(datos =>{
@@ -90,30 +85,9 @@ export class GestorComponent implements OnInit {
     this.gestorSeleccionado = gestor;
   }
 
-    convertirDesdeJson(): void {
-      if (this.gestoresJson) {
-        const arrayGest: Gestor[] = this.conversionService.convertirDesdeJson(this.gestoresJson);
-        this.gestores = arrayGest;
-        this.mostrarConvertidosDesdeJson = true;
-      }
-    }
-
-    convertirGestoresAJson(): void {
-      if (this.gestores.length > 0) {
-        this.gestoresJson = this.conversionService.convertirGesotresAJson(this.gestores);
-      }
-      this.mostrarConvertidosAJson=true;
-    }
-
-    ocultarConvertidos(): void {
-      this.mostrarConvertidosAJson=false;
-      this.mostrarConvertidosDesdeJson = false;
-    }
-
-    ocultarConvertidosDesdeJson(): void {
-      this.mostrarConvertidosDesdeJson = false;
-    }
-
+  ocultarFormulario(): void{
+    this.formularioActualizar=false;
+  }
 
 
 

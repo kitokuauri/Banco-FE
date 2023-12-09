@@ -3,7 +3,6 @@ import { Cliente } from './cliente/cliente.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
-import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,16 @@ export class ClienteService {
   }
 
   crearCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(this.apiUrl, cliente);
+    let nuevoCliente = {
+      id: cliente.id,
+      nombre: cliente.nombre,
+      apellido: cliente.apellido,
+      email: cliente.email,
+      id_gestor: {
+        id: cliente.id_gestor
+      }
+    };
+    return this.http.post<Cliente>(this.apiUrl, nuevoCliente);
   }
 
   actualizarCliente(id: number, cambios: any): Observable<Cliente> {

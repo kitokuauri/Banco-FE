@@ -1,3 +1,7 @@
+:host {
+    margin-left: 20%;
+}
+
 .dialogo {
     display: flex;
     flex-direction: column;

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TransferenciaService } from '../transferencia.service';
 import { Transferencia } from './transferencia.model';
-import { ConversionService } from '../conversion-json.service';
 import { HttpClient } from '@angular/common/http';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cliente/cliente.model';
 
 @Component({
   selector: 'app-transferencia',
@@ -15,22 +16,22 @@ import { MatDialog } from '@angular/material/dialog';
 export class TransferenciaComponent implements OnInit {
 
   transferencias: Transferencia[] = [];
-  nuevaTransferencia: Transferencia = new Transferencia(0, "", "", 0, new Date());
+  clientes: Cliente[] = [];
+  nuevaTransferencia: Transferencia = new Transferencia(0, 0, 0, "", "", 0, new Date(), "");
   transferenciaSeleccionada: Transferencia | null = null;
-
-  transJson: string='';
-  mostrarConvertidosAJson = false;
-  mostrarConvertidosDesdeJson=false;
 
   formularioActualizar=false;
 
-  constructor(private http: HttpClient, private transferenciaService: TransferenciaService, private conversionService: ConversionService, private dialog: MatDialog) {}
+  constructor(private clienteService: ClienteService , private http: HttpClient, private transferenciaService: TransferenciaService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.transferenciaService.obtenerTransferencia().subscribe(datos =>{
       console.log(datos);
       this.transferencias = datos;
       this.transferenciaSeleccionada= null;
+    });
+    this.clienteService.obtenerClientes().subscribe(datos =>{
+      this.clientes = datos;
     })
   }
 
@@ -59,7 +60,7 @@ export class TransferenciaComponent implements OnInit {
     this.transferenciaService.crearTransferencia(this.nuevaTransferencia).subscribe(datos =>{
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
         this.transferencias = nuevosDatos;
-        this.nuevaTransferencia = new Transferencia(0, "", "", 0, new Date());
+        this.nuevaTransferencia = new Transferencia(0, 0, 0, "", "", 0, new Date(), "");
         alert("Transferencia enviada con éxito!");
       })
     });
@@ -109,27 +110,7 @@ export class TransferenciaComponent implements OnInit {
     this.transferenciaSeleccionada = transferencia;
   }
 
-  convertirDesdeJson(): void {
-    if (this.transJson) {
-      const arrayGest: Transferencia[] = this.conversionService.convertirDesdeJson(this.transJson);
-      this.transferencias = arrayGest;
-      this.mostrarConvertidosDesdeJson = true;
-    }
-  }
 
-  convertirTransAJson(): void {
-      this.transJson = this.conversionService.convertirTransAJson(this.transferencias);
-      this.mostrarConvertidosAJson = true;
-  }
-
-  ocultarConvertidos(): void {
-    this.mostrarConvertidosAJson = false;
-    this.mostrarConvertidosDesdeJson = false;
-  }
-
-  ocultarConvertidosDesdeJson(): void {
-    this.mostrarConvertidosDesdeJson = false;
-  }
 
 }
 

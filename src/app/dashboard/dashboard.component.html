@@ -1,22 +1,23 @@
-<h1>Bienvenido al Banco</h1>
+<nav>
+    <div class="ul">
+        <button class="link"><a  routerLink="/gestores"><i class="fa-solid fa-lemon fa-fw"></i>Gestores</a></button>
+        <button class="link"><a  routerLink="/clientes"><i class="fa-solid fa-user fa-fw"></i>Clientes</a></button>
+        <button class="link"><a  routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
+        <button class="link"><a  routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
+    </div>
+</nav>
 
+<h1>Bienvenido a <span id="lemon">Lemon Bank</span></h1>
+<img src="/assets/lemon .png" alt="Logo" id="logo">
 <div class="box">
     <div class="search-bar">
-        <input type="text" class="search" placeholder="Busca entre Gestores, Clientes, Mensajes y Transferencias." (keyup)="onSearchKeyUp($event)">
+        <input type="text" class="search" placeholder="Busca entre Gestores, Clientes, Mensajes y Transferencias" (keyup)="onSearchKeyUp($event)"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
     </div>
-    <ul class="lista">
+    <ul>
         <li *ngFor="let item of listaFiltrada">
             {{ item.nombre || item.remitente || item.destinatario }}
         </li>
     </ul>
 </div>
-<nav>
-    <ul>
-        <li><a routerLink="/gestores">Gestores</a></li>
-        <li><a routerLink="/clientes">Clientes</a></li>
-        <li><a routerLink="/mensajes">Mensajes</a></li>
-        <li><a routerLink="/transferencias">Transferencias</a></li>
-    </ul>
-</nav>
-<router-outlet></router-outlet>
+
 
