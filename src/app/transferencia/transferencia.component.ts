@@ -3,6 +3,8 @@ import { TransferenciaService } from '../transferencia.service';
 import { Transferencia } from './transferencia.model';
 import { ConversionService } from '../conversion-json.service';
 import { HttpClient } from '@angular/common/http';
+import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-transferencia',
@@ -22,7 +24,7 @@ export class TransferenciaComponent implements OnInit {
 
   formularioActualizar=false;
 
-  constructor(private http: HttpClient, private transferenciaService: TransferenciaService, private conversionService: ConversionService) {}
+  constructor(private http: HttpClient, private transferenciaService: TransferenciaService, private conversionService: ConversionService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.transferenciaService.obtenerTransferencia().subscribe(datos =>{
@@ -64,12 +66,19 @@ export class TransferenciaComponent implements OnInit {
   }
 
   eliminarTransferencia(id: number): void{
-    
-    this.transferenciaService.eliminarTransferencia(id).subscribe(()=>{
-      this.transferenciaService.notificarEliminacion();
-      this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
-        this.transferencias = nuevosDatos;
-      })
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      panelClass: 'dialogo',
+      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar una transferencia? Los datos no se podrán recuperar.' }
+    });
+    dialogRef.afterClosed().subscribe(resultado =>{
+      if(resultado){
+        this.transferenciaService.eliminarTransferencia(id).subscribe(()=>{
+          this.transferenciaService.notificarEliminacion();
+          this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
+            this.transferencias = nuevosDatos;
+          })
+        })
+      }
     })
   }
 

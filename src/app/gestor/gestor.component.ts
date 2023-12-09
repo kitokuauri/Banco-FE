@@ -4,6 +4,8 @@ import { Gestor } from './gestor.model';
 import { ConversionService } from '../conversion-json.service';
 import { HttpClient } from '@angular/common/http';
 import { subscribeOn } from 'rxjs';
+import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class GestorComponent implements OnInit {
 
   formularioActualizar=false;
 
-  constructor(private gestorService: GestorService, private conversionService: ConversionService, private http: HttpClient) {}
+  constructor(private gestorService: GestorService, private conversionService: ConversionService, private http: HttpClient, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gestorService.obtenerGestores().subscribe(datos =>{
@@ -44,11 +46,19 @@ export class GestorComponent implements OnInit {
   }
 
   eliminarGestor(id: number): void{
-    this.gestorService.eliminarGestor(id).subscribe(()=>{
-      this.gestorService.notificarEliminacion();
-      this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
-        this.gestores = nuevosDatos;
-      })
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      panelClass: 'dialogo',
+      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un gestor? Los datos no se podrán recuperar.' }
+    });
+    dialogRef.afterClosed().subscribe(resultado =>{
+      if(resultado){
+        this.gestorService.eliminarGestor(id).subscribe(()=>{
+          this.gestorService.notificarEliminacion();
+          this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
+            this.gestores = nuevosDatos;
+          })
+        })
+      }
     })
   }
 

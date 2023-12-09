@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MensajeService } from '../mensaje.service';
 import { Mensaje } from './mensaje.model';
 import { HttpClient } from '@angular/common/http';
+import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ConversionService } from '../conversion-json.service';
 
@@ -22,7 +24,7 @@ export class MensajeComponent implements OnInit {
 
   formularioActualizar=false;
 
-  constructor(private http: HttpClient, private mensajeService: MensajeService, private conversionService: ConversionService) {}
+  constructor(private http: HttpClient, private mensajeService: MensajeService, private conversionService: ConversionService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.mensajeService.obtenerMensajes().subscribe(datos =>{
@@ -43,11 +45,19 @@ export class MensajeComponent implements OnInit {
   }
 
   eliminarMensaje(id: number): void{
-    this.mensajeService.eliminarMensaje(id).subscribe(()=>{
-      this.mensajeService.notificarEliminacion();
-      this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
-        this.mensajes = nuevosDatos;
-      })
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      panelClass: 'dialogo',
+      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un mensaje? Los datos no se podrán recuperar.' }
+    });
+    dialogRef.afterClosed().subscribe(resultado =>{
+      if(resultado){
+        this.mensajeService.eliminarMensaje(id).subscribe(()=>{
+          this.mensajeService.notificarEliminacion();
+          this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
+            this.mensajes = nuevosDatos;
+          })
+        })
+      }
     })
   }
 
