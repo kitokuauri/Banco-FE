@@ -12,7 +12,6 @@
 <div class="box">
     <table>
         <thead>
-            
             <tr>
                 <!-- th columna de cabecera -->
                 <th></th>
@@ -51,7 +50,6 @@
                 </option>
             </select><br>
             <label for="id_destinatario">Destinatario: </label>
-            <label for="id_destinatario"></label>
             <select name="id_destinatario" [(ngModel)]="nuevoMensaje.id_destinatario" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
                 <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">

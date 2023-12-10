@@ -22,3 +22,7 @@
 .fecha{
     width: 181px;
 }
+textarea {
+    width: 181px;
+    height: 20px;
+}

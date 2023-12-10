@@ -45,7 +45,6 @@
         <h3>Enviar Transferencia</h3>
         <form (submit)="insertarTransferencia()">
             <label for="id_remitente">Remitente:</label>
-            <label for="id_remitente"></label>
             <select name="id_remitente" [(ngModel)]="nuevaTransferencia.id_remitente" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
                 <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">
@@ -53,7 +52,6 @@
                 </option>
             </select><br>
             <label for="id_destinatario">Destinatario: </label>
-            <label for="id_destinatario"></label>
             <select name="id_destinatario" [(ngModel)]="nuevaTransferencia.id_destinatario" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
                 <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">
