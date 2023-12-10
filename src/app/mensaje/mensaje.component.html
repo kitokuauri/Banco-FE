@@ -26,12 +26,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let mensaje of mensajes">
-                <td><i class="fa-solid fa-comment"></i></td>
+                <td class="emoji"><i class="fa-solid fa-comment"></i></td>
                 <!-- td columna normal -->
-                <td>{{ mensaje.id}}</td>
-                <td>{{ mensaje.id_remitente.nombre }}</td>
-                <td>{{ mensaje.id_destinatario.nombre }}</td>
-                <td>{{ mensaje.fecha }}</td>
+                <td class="id">{{ mensaje.id}}</td>
+                <td class="nom-mens">{{ mensaje.id_remitente.nombre }}</td>
+                <td class="nom-mens">{{ mensaje.id_destinatario.nombre }}</td>
+                <td id="fecha">{{ mensaje.fecha }}</td>
                 <td id="mensaje">{{ mensaje.mensaje }}</td>
                 <td class="botones"> 
                     <button class="boton" (click)="eliminarMensaje(mensaje.id)">Eliminar</button>

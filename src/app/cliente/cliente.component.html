@@ -26,12 +26,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let cliente of clientes">
-                <td><i class="fa-solid fa-user"></i></td>
+                <td class="emoji"><i class="fa-solid fa-user"></i></td>
                 <!-- td columna normal -->
-                <td>{{ cliente.id}}</td>
-                <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
-                <td>{{ cliente.id_gestor.nombre }}</td>
-                <td><a href="mailto:{{ cliente.email }}">{{ cliente.email }}</a></td>
+                <td class="id">{{ cliente.id}}</td>
+                <td class="nombre">{{ cliente.nombre }} {{ cliente.apellido }}</td>
+                <td class="nombre">{{ cliente.id_gestor.nombre }}</td>
+                <td class="email"><a href="mailto:{{ cliente.email }}">{{ cliente.email }}</a></td>
                 <td class="botones">
                     <button class="boton" (click)="mostrarFormulario(cliente)">Modificar</button>
                 </td>

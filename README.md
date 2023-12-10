@@ -29,4 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #Instalaciones:
 npm install rxjs  
 ng add @angular/material => NO APLICAR ESTILOS (si los aplica, borrar de angular.json - styles. Incluye automaticamente estilos en el styles.css) 
+npm install jquery-confirm
 

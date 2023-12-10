@@ -18,7 +18,7 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Edad</th>
-                <th>Correo</th>
+                <th>Email</th>
                 <th>Salario</th>
                 <th></th>
                 <th></th>
@@ -26,13 +26,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let gestor of gestores">
-                <td><i class="fa-solid fa-lemon"></i></td>
+                <td class="emoji"><i class="fa-solid fa-lemon"></i></td>
                 <!-- td columna normal -->
-                <td>{{ gestor.id}}</td>
-                <td>{{ gestor.nombre }} {{ gestor.apellido }}</td>
-                <td>{{ gestor.edad }}</td>
-                <td><a href="mailto:{{ gestor.email }}">{{ gestor.email }}</a></td>
-                <td>{{ gestor.salario }}€</td>
+                <td class="id">{{ gestor.id}}</td>
+                <td class="nombre">{{ gestor.nombre }} {{ gestor.apellido }}</td>
+                <td class="edad">{{ gestor.edad }}</td>
+                <td class="email"><a href="mailto:{{ gestor.email }}">{{ gestor.email }}</a></td>
+                <td id="salario">{{ gestor.salario }}€</td>
                 <td>
                     <button class="boton" (click)="mostrarFormulario(gestor)">Modificar</button>
                 </td>

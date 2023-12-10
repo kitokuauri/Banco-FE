@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { subscribeOn } from 'rxjs';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material/dialog';
-
+declare var $: any;
 
 @Component({
   selector: 'app-gestor',
@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class GestorComponent implements OnInit {
+  
 
   gestores: Gestor[] = [];
   nuevoGestor: Gestor = new Gestor(0, "", "", 18, "", 1200);
@@ -41,20 +42,30 @@ export class GestorComponent implements OnInit {
   }
 
   eliminarGestor(id: number): void{
-    const dialogRef = this.dialog.open(ConfirmacionComponent, {
-      panelClass: 'dialogo',
-      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un gestor? Los datos no se podrán recuperar.' }
+    const that = this;
+      $.confirm({
+        title: '¿Estas seguro de eliminar un gestor?',
+        content: 'Los datos no se podrán recuperar.',
+        type: 'green',
+        buttons: {   
+            ok: {
+                text: "Aceptar",
+                btnClass: 'btn-primary',
+                keys: ['enter'],
+                action: function(){
+                  that.gestorService.eliminarGestor(id).subscribe(()=>{
+                    that.gestorService.notificarEliminacion();
+                    that.gestorService.obtenerGestores().subscribe(nuevosDatos => {
+                      that.gestores = nuevosDatos;
+                    })
+                  })
+                }
+            },
+            cancel: function(){
+              
+            }
+        }
     });
-    dialogRef.afterClosed().subscribe(resultado =>{
-      if(resultado){
-        this.gestorService.eliminarGestor(id).subscribe(()=>{
-          this.gestorService.notificarEliminacion();
-          this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
-            this.gestores = nuevosDatos;
-          })
-        })
-      }
-    })
   }
 
   actualizarGestor(): void {
@@ -67,8 +78,6 @@ export class GestorComponent implements OnInit {
       };
   
       this.gestorService.actualizarGestor(this.gestorSeleccionado?.id || 0, cambios).subscribe(gestorActualizado => {
-        console.log("Gestor actualizado: ", gestorActualizado);
-  
         this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
           this.gestores = nuevosDatos;
           this.formularioActualizar = false;

@@ -26,13 +26,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let transferencia of transferencias">
-                <td><i class="fa-solid fa-sack-dollar"></i></td>
+                <td class="emoji"><i class="fa-solid fa-sack-dollar"></i></td>
                 <!-- td columna normal -->
-                <td>{{ transferencia.id}}</td>
-                <td>{{ transferencia.id_remitente.nombre }}</td>
-                <td>{{ transferencia.id_destinatario.nombre }}</td>
-                <td>{{ transferencia.fecha }}</td>
-                <td>{{ transferencia.cantidad }}€</td>
+                <td class="id">{{ transferencia.id}}</td>
+                <td class="nom-mens">{{ transferencia.id_remitente.nombre }}</td>
+                <td class="nom-mens">{{ transferencia.id_destinatario.nombre }}</td>
+                <td id="fecha">{{ transferencia.fecha }}</td>
+                <td id="salario">{{ transferencia.cantidad }}€</td>
                 <td id="mensaje">{{ transferencia.mensaje }}</td>
                 <td class="botones">
                     <button class="boton" (click)="eliminarTransferencia(transferencia.id)">Eliminar</button>
