@@ -21,8 +21,6 @@ export class MensajeService {
   crearMensaje(mensaje: Mensaje): Observable<Mensaje> {
     let nuevoMensaje = {
       id: mensaje.id,
-      remitente: mensaje.remitente,
-      destinatario: mensaje.destinatario,
       fecha: mensaje.fecha,
       mensaje: mensaje.mensaje,
       id_remitente: {

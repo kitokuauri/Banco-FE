@@ -4,7 +4,7 @@
         <button class="link"><a class="router" routerLink=""><i class="fa-solid fa-home fa-fw"></i> Home</a></button>
         <button class="link"><a class="router"  routerLink="/gestores"><i class="fa-solid fa-lemon fa-fw"></i>Gestores</a></button>
         <button class="link"><a class="router" routerLink="/clientes"><i class="fa-solid fa-user fa-fw"></i>Clientes</a></button>
-        <button class="link"><a class="router" routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
+        <button class="link" id="men"><a class="router" routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
         <button class="link"><a class="router" routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
     </div>
 </nav>
@@ -29,8 +29,8 @@
                 <td><i class="fa-solid fa-comment"></i></td>
                 <!-- td columna normal -->
                 <td>{{ mensaje.id}}</td>
-                <td>{{ mensaje.remitente }}</td>
-                <td>{{ mensaje.destinatario }}</td>
+                <td>{{ mensaje.id_remitente.nombre }}</td>
+                <td>{{ mensaje.id_destinatario.nombre }}</td>
                 <td>{{ mensaje.fecha }}</td>
                 <td id="mensaje">{{ mensaje.mensaje }}</td>
                 <td class="botones"> 
@@ -43,17 +43,14 @@
     <div>
         <h3>Enviar Mensaje</h3>
         <form (submit)="insertarMensaje()">
-            <label for="text">Remitente:</label>
-            <input type="text" [(ngModel)]="nuevoMensaje.remitente" name="remitente" required><br>
-            <label for="id_remitente"></label>
+            <label for="id_remitente">Remitente:</label>
             <select name="id_remitente" [(ngModel)]="nuevoMensaje.id_remitente" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
                 <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">
                     {{ cliente.nombre }}
                 </option>
             </select><br>
-            <label for="text">Destinatario: </label>
-            <input type="text" [(ngModel)]="nuevoMensaje.destinatario" name="destinatario" required><br>
+            <label for="id_destinatario">Destinatario: </label>
             <label for="id_destinatario"></label>
             <select name="id_destinatario" [(ngModel)]="nuevoMensaje.id_destinatario" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>

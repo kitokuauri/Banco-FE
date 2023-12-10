@@ -84,6 +84,9 @@ td {
     text-align: center;
     padding: 1rem;
 }
+th{
+    padding: 1em;
+}
 #mensaje{
     width: 100%;
     text-align: justify;

@@ -21,8 +21,6 @@ export class TransferenciaService {
   crearTransferencia(transferencia: Transferencia): Observable<Transferencia> {
     let nuevaTransferencia = {
       id: transferencia.id,
-      remitente: transferencia.remitente,
-      destinatario: transferencia.destinatario,
       fecha: transferencia.fecha,
       cantidad: transferencia.cantidad,
       mensaje: transferencia.mensaje,

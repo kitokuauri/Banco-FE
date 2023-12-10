@@ -18,7 +18,7 @@ export class MensajeComponent implements OnInit {
   
   mensajes: Mensaje[] = [];
   clientes: Cliente[] = [];
-  nuevoMensaje: Mensaje = new Mensaje(0, {} as any, {} as any, "", "", "", new Date());
+  nuevoMensaje: Mensaje = new Mensaje(0, {} as any, {} as any, "", new Date());
   mensajeSeleccionada: Mensaje | null = null;
 
   formularioActualizar=false;
@@ -40,7 +40,7 @@ export class MensajeComponent implements OnInit {
     this.mensajeService.crearMensaje(this.nuevoMensaje).subscribe(datos =>{
       this.mensajeService.obtenerMensajes().subscribe(nuevosDatos => {
         this.mensajes = nuevosDatos;
-        this.nuevoMensaje = new Mensaje(0, {} as any, {} as any, "", "", "", new Date());
+        this.nuevoMensaje = new Mensaje(0, {} as any, {} as any, "", new Date());
         alert("¡Mensaje enviado con éxito!");
       })
     });

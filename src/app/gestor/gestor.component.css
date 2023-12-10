@@ -10,6 +10,10 @@
     border-radius: 5px;
     width: 100px;
 }
+#ges {
+    background-color: #ffca2c;
+    border-radius: 10px;
+}
 .boton:hover {
     background-color: #009e1d;
 }

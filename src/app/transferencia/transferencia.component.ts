@@ -17,7 +17,7 @@ export class TransferenciaComponent implements OnInit {
 
   transferencias: Transferencia[] = [];
   clientes: Cliente[] = [];
-  nuevaTransferencia: Transferencia = new Transferencia(0, 0, 0, "", "", 0, new Date(), "");
+  nuevaTransferencia: Transferencia = new Transferencia(0, {} as any, {} as any, 0, new Date(), "");
   transferenciaSeleccionada: Transferencia | null = null;
 
   formularioActualizar=false;
@@ -60,7 +60,7 @@ export class TransferenciaComponent implements OnInit {
     this.transferenciaService.crearTransferencia(this.nuevaTransferencia).subscribe(datos =>{
       this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
         this.transferencias = nuevosDatos;
-        this.nuevaTransferencia = new Transferencia(0, 0, 0, "", "", 0, new Date(), "");
+        this.nuevaTransferencia = new Transferencia(0, {} as any, {} as any, 0, new Date(), "");
         alert("Transferencia enviada con éxito!");
       })
     });
@@ -81,28 +81,6 @@ export class TransferenciaComponent implements OnInit {
         })
       }
     })
-  }
-
-  actualizarTransferencia(): void {
-    if (this.transferenciaSeleccionada) {
-      const cambios = {
-        remitente: this.transferenciaSeleccionada?.remitente,
-        destinatario: this.transferenciaSeleccionada?.destinatario,
-        cantidad: this.transferenciaSeleccionada?.cantidad,
-      };
-  
-      this.transferenciaService.actualizarTransferencia(this.transferenciaSeleccionada?.id || 0, cambios).subscribe(gestorActualizado => {
-        console.log("Transferencia actualizada: ", gestorActualizado);
-  
-        this.transferenciaService.obtenerTransferencia().subscribe(nuevosDatos => {
-          this.transferencias = nuevosDatos;
-          this.formularioActualizar = false;
-        });
-      },
-      error => {
-        console.error("Error al actualizar la transferencia: ", error);
-      });
-    }
   }
 
   mostrarFormulario(transferencia: Transferencia): void{  

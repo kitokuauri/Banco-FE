@@ -5,7 +5,7 @@
         <button class="link"><a class="router"  routerLink="/gestores"><i class="fa-solid fa-lemon fa-fw"></i>Gestores</a></button>
         <button class="link"><a class="router" routerLink="/clientes"><i class="fa-solid fa-user fa-fw"></i>Clientes</a></button>
         <button class="link"><a class="router" routerLink="/mensajes"><i class="fa-solid fa-comment fa-fw"></i>Mensajes</a></button>
-        <button class="link"><a class="router" routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
+        <button class="link" id="trans"><a class="router" routerLink="/transferencias"><i class="fa-solid fa-sack-dollar fa-fw "></i>Transferencias</a></button>
     </div>
 </nav>
 <h2>Lista de Transferencias</h2>
@@ -29,8 +29,8 @@
                 <td><i class="fa-solid fa-sack-dollar"></i></td>
                 <!-- td columna normal -->
                 <td>{{ transferencia.id}}</td>
-                <td>{{ transferencia.remitente }}</td>
-                <td>{{ transferencia.destinatario }}</td>
+                <td>{{ transferencia.id_remitente.nombre }}</td>
+                <td>{{ transferencia.id_destinatario.nombre }}</td>
                 <td>{{ transferencia.fecha }}</td>
                 <td>{{ transferencia.cantidad }}€</td>
                 <td id="mensaje">{{ transferencia.mensaje }}</td>
@@ -44,8 +44,7 @@
     <div>
         <h3>Enviar Transferencia</h3>
         <form (submit)="insertarTransferencia()">
-            <label for="text">Remitente:</label>
-            <input type="text" [(ngModel)]="nuevaTransferencia.remitente" name="remitente" required><br>
+            <label for="id_remitente">Remitente:</label>
             <label for="id_remitente"></label>
             <select name="id_remitente" [(ngModel)]="nuevaTransferencia.id_remitente" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
@@ -53,8 +52,7 @@
                     {{ cliente.nombre }}
                 </option>
             </select><br>
-            <label for="text">Destinatario: </label>
-            <input type="text" [(ngModel)]="nuevaTransferencia.destinatario" name="destinatario" required><br>
+            <label for="id_destinatario">Destinatario: </label>
             <label for="id_destinatario"></label>
             <select name="id_destinatario" [(ngModel)]="nuevaTransferencia.id_destinatario" name="id_gestor">
                 <option selected disabled value="0">Seleccione una opción:</option>
