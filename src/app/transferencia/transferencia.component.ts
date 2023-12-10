@@ -69,7 +69,7 @@ export class TransferenciaComponent implements OnInit {
   eliminarTransferencia(id: number): void{
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
       panelClass: 'dialogo',
-      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar una transferencia? Los datos no se podrán recuperar.' }
+      data: { titulo: '¿Estas seguro de eliminar una transferencia?', mensaje: 'Los datos no se podrán recuperar.' }
     });
     dialogRef.afterClosed().subscribe(resultado =>{
       if(resultado){

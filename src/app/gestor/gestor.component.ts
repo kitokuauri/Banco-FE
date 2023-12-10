@@ -42,30 +42,20 @@ export class GestorComponent implements OnInit {
   }
 
   eliminarGestor(id: number): void{
-    const that = this;
-      $.confirm({
-        title: '¿Estas seguro de eliminar un gestor?',
-        content: 'Los datos no se podrán recuperar.',
-        type: 'green',
-        buttons: {   
-            ok: {
-                text: "Aceptar",
-                btnClass: 'btn-primary',
-                keys: ['enter'],
-                action: function(){
-                  that.gestorService.eliminarGestor(id).subscribe(()=>{
-                    that.gestorService.notificarEliminacion();
-                    that.gestorService.obtenerGestores().subscribe(nuevosDatos => {
-                      that.gestores = nuevosDatos;
-                    })
-                  })
-                }
-            },
-            cancel: function(){
-              
-            }
-        }
+    const dialogRef = this.dialog.open(ConfirmacionComponent, {
+      panelClass: 'dialogo',
+      data: { titulo: '¿Estas seguro de eliminar un gestor?', mensaje: 'Los datos no se podrán recuperar.' }
     });
+    dialogRef.afterClosed().subscribe(resultado =>{
+      if(resultado){
+        this.gestorService.eliminarGestor(id).subscribe(()=>{
+          this.gestorService.notificarEliminacion();
+          this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
+            this.gestores = nuevosDatos;
+          })
+        })
+      }
+    })
   }
 
   actualizarGestor(): void {

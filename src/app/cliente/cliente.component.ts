@@ -47,7 +47,7 @@ export class ClienteComponent implements OnInit {
   eliminarCliente(id: number): void{
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
       panelClass: 'dialogo',
-      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un cliente? Los datos no se podrán recuperar.' }
+      data: { titulo: '¿Estas seguro de eliminar un cliente?', mensaje: 'Los datos no se podrán recuperar.' }
     });
     dialogRef.afterClosed().subscribe(resultado =>{
       if(resultado){

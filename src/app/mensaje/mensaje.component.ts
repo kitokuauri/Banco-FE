@@ -49,7 +49,7 @@ export class MensajeComponent implements OnInit {
   eliminarMensaje(id: number): void{
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
       panelClass: 'dialogo',
-      data: { titulo: 'Confirmación', mensaje: '¿Estas seguro de eliminar un mensaje? Los datos no se podrán recuperar.' }
+      data: { titulo: '¿Estas seguro de eliminar un mensaje?', mensaje: 'Los datos no se podrán recuperar.' }
     });
     dialogRef.afterClosed().subscribe(resultado =>{
       if(resultado){

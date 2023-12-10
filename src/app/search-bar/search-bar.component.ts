@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { DataService } from '../data.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {ClienteService} from "../cliente.service";
+import {Cliente} from "../cliente/cliente.model";
+import {GestorService} from "../gestor.service";
+import {Gestor} from "../gestor/gestor.model";
+
 
 @Component({
   selector: 'app-search-bar',
@@ -8,36 +14,52 @@ import { DataService } from '../data.service';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent  implements OnInit {
- // para manejar a través de observables los eventos de nuestro buscador
-  searchTerm$ = new Subject<string>();
-  allData: any[] = [];
-  listaFiltrada: any[] = [];
 
-  constructor(private dataservice: DataService){}
+  clientes: Cliente[] = [];
+  gestores: Gestor[] = [];
+  listaFiltrada: Observable<any[]> = new Observable<any[]>();
+  myControl = new FormControl('');
 
-  ngOnInit(): void{
-    this.dataservice.getAllData().subscribe((datos) =>{
-      // combina los resultados de todos los endpoints en un array
-      this.allData = datos.reduce((acc, curr)=> acc.concat(curr), []);
-      this.listaFiltrada = this.allData.slice();
-    }),
-    this.searchTerm$.subscribe((term)=>{
-      this.listaFiltrada = this.filtrarLista(term);
-    })
+  constructor(private clienteService: ClienteService, private gestorService: GestorService){}
+
+  ngOnInit(): void {
+      this.clienteService.obtenerClientes().subscribe(datos => {
+        this.clientes = datos;
+      });
+      this.gestorService.obtenerGestores().subscribe(datos =>{
+        this.gestores = datos;
+      });
+      this.listaFiltrada = this.myControl.valueChanges.pipe(startWith(''), map(value => this._filter(value || '')));
   }
 
-  private filtrarLista(term: String): any[]{
-    return this.allData.filter((item)=>{
-      return (
-        item.name.toLowerCase().indexOf(term.toLowerCase()) !== -1 ||
-        item.remitente.toLowerCase().indexOf(term.toLowerCase()) !== -1 ||
-        item.destinatario.toLowerCase().indexOf(term.toLowerCase()) !== -1
-      );
+  private _filter(value: String): String[]{
+    const filterValue = value.toLowerCase();
+    let options: any[] = [];
+
+    this.clienteService.obtenerClientePorNombre(filterValue).subscribe(datos => {
+      this.clientes = datos;
     });
+    this.gestorService.obtenerGestorPorNombre(filterValue).subscribe(datos =>{
+      this.gestores = datos;
+    });
+
+    for (const cliente of this.clientes) {
+      options.push({
+        type:'cliente',
+        id: cliente.id,
+        nombre: cliente.nombre + '' + cliente.apellido
+      });
+    }
+
+    for (const gestor of this.gestores) {
+      options.push({
+        type: 'gestor',
+        id: gestor.id,
+        nombre: gestor.nombre + ' ' + gestor.apellido,
+      });
+    }
+
+    return options.filter(opcion => opcion.nombre.toLowerCase().includes(filterValue));
   }
 
-  onSearchKeyUp(event: KeyboardEvent): void{
-    const inputValue = (event.target as HTMLInputElement)?.value;
-    this.searchTerm$.next(inputValue);
-  }
 }

@@ -13,7 +13,7 @@ import { MensajeService } from './mensaje.service';
 import { TransferenciaService } from './transferencia.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +42,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     NgStyle,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     GestorService,

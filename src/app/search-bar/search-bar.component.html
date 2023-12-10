@@ -1,10 +1,10 @@
 <div>
     <div class="search-bar">
-        <input type="text" class="search" placeholder="Busca entre Gestores y Clientes" (keyup)="onSearchKeyUp($event)"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="search" placeholder="Busca entre Gestores y Clientes" [formControl]="myControl"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
     </div>
     <ul>
-        <li *ngFor="let item of listaFiltrada">
-            {{ item.nombre || item.remitente || item.destinatario }}
+        <li *ngFor="let opcion of listaFiltrada | async" [value]="opcion">
+            {{ opcion.type }} >> {{ opcion.id}} {{ opcion.nombre}}
         </li>
     </ul>
 </div>
