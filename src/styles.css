@@ -6,20 +6,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     color: #4a1c73;
 }
-.search{
-    width: 60%;
-    padding: 5px;
-    margin-left: 20%;
-    margin-bottom: 20px;
-    border-color: #4a1c73;
-    border-radius: 7px;
-    border-width: 2px;
-    
-}
 
-::placeholder{
-    text-align: center;
-}
 
 nav {
     background-color: #ffe9a8;
@@ -37,10 +24,13 @@ nav {
 li {
     margin: 0 15px;
 }
-a {
+.router {
     text-decoration: none;
     color: #4a1c73;
     font-weight: bold;
+}
+a{
+    color: #4a1c73;
 }
 .link{
     border: none;
@@ -48,12 +38,61 @@ a {
     color: #4a1c73;
     padding: 5px 10px;
     font-size: 17px;
+    
 }
 
 .link:hover {
     background-color: #ffca2c;
     border-radius: 10px;
 }
-#lupa{
-    padding-left: 5px;
+/* -------- */
+h2, h3 {
+    text-align: center;
+
 }
+
+label{
+    display: inline-block;
+    width: 150px;
+    margin: 3px 100px;
+}
+
+select{
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #4a1c73;
+    background-color: #fff1c9;
+    width: 189px;
+}
+
+table{
+    display: block;
+    margin: auto;
+    width: 90%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.box {
+    width: 80%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+td {
+    text-align: center;
+    padding: 1rem;
+}
+#mensaje{
+    width: 100%;
+    text-align: justify;
+}
+
+.botones {
+    width: 100%;
+}
+
+
+
+

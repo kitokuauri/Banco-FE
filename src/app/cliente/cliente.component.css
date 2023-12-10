@@ -1,16 +1,5 @@
 
-h2, h3 {
-    text-align: center;
 
-}
-
-h4{
-    color: #333;
-}
-
-p, h4 {
-    margin: 10px 100px;
-}
 
 .boton {
     background-color: #00ce6a;
@@ -28,21 +17,8 @@ p, h4 {
     background-color: #009e1d;
 }
 
-hr{
-    width: 350px;
-    margin: 10px 100px;    border: 1px solid grey;
-}
-
 label{
     display: inline-block;
     width: 150px;
     margin: 3px 100px;
-}
-
-select{
-    border-radius: 5px;
-    box-shadow: none;
-    border: 1px solid #4a1c73;
-    background-color: #fff1c9;
-    width: 189px;
 }

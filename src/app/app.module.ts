@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
     MensajeComponent,
     TransferenciaComponent,
     DashboardComponent,
-    ConfirmacionComponent
+    ConfirmacionComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

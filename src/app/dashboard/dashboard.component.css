@@ -6,7 +6,8 @@ h1 {
 #logo {
     width: 187px;
     height: 167px;
-    margin: 0 auto 0 45%;
+    margin: auto;
+    display: block;
 }
 #lemon {
     font-family: shrikhand;
