@@ -62,4 +62,8 @@ export class SearchBarComponent  implements OnInit {
     return options.filter(opcion => opcion.nombre.toLowerCase().includes(filterValue));
   }
 
+  getIconClass(type: string): string {
+    return type === 'cliente' ? "fa-solid fa-user fa-fw" : "fa-solid fa-lemon fa-fw";
+  }
+
 }

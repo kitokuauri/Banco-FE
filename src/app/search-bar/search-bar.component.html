@@ -4,7 +4,7 @@
     </div>
     <ul>
         <li *ngFor="let opcion of listaFiltrada | async" [value]="opcion">
-            {{ opcion.type }} >> {{ opcion.id}} {{ opcion.nombre}}
+            {{ opcion.type }} <i [class]="getIconClass(opcion.type)"></i> Id {{ opcion.id}} {{ opcion.nombre}}
         </li>
     </ul>
 </div>

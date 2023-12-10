@@ -14,3 +14,33 @@
 #lupa{
     padding-left: 5px;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+}
+
+  /* Espaciado entre el ícono y el texto */
+li i {
+    padding: 100px;
+}
+
+  /* Estilo específico para el tipo 'cliente' */
+li.type-cliente {
+    color: #007bff; /* Color azul para clientes */
+}
+
+  /* Estilo específico para el tipo 'gestor' */
+li.type-gestor {
+    color: #28a745; /* Color verde para gestores */
+}

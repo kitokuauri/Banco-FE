@@ -38,7 +38,8 @@ a{
     color: #4a1c73;
     padding: 5px 10px;
     font-size: 17px;
-    
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .link:hover {
@@ -116,6 +117,18 @@ th{
 #fecha {
     width: 10%;
 }
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+}
+.agregar {
+    padding-right: 5%;
+}
+
 
 /* --- Estilos Dialogo Confirmación --- */
 

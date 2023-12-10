@@ -41,44 +41,44 @@
             </tr>
         </tbody>
     </table>
-
-    <div *ngIf="formularioActualizar && clienteSeleccionado" >
-        <h3>Modificar Cliente</h3>
-        <form (submit)="actualizarCliente()">
-            <label for="text">Nombre:</label>
-            <input type="text" [(ngModel)]="clienteSeleccionado.nombre" name="nombre" required><br>
-            <label for="text">Apellido: </label>
-            <input type="text" [(ngModel)]="clienteSeleccionado.apellido" name="apellido" required><br>
-            <label for="id_gestor"> Gestor: </label>
-            <select name="id_gestor" [(ngModel)]="clienteSeleccionado.id_gestor.id">
-                <option *ngFor="let gestor of gestores" value="{{ gestor.id }}">
-                    {{ gestor.nombre }}
-                </option>
-            </select><br>
-            <label for="email">Email: </label>
-            <input type="email" [(ngModel)]="clienteSeleccionado.email" name="email" required><br>
-            <button class="boton" type="submit">Enviar</button>
-            <button class="boton" (click)="ocultarFormulario()">Cancelar</button>
-        </form>
+    <div>        
+        <div class="formulario">
+            <h3>Agregar Cliente</h3>
+            <form class="agregar" (submit)="insertarCliente()">
+                <label for="text">Nombre:</label>
+                <input type="text" [(ngModel)]="nuevoCliente.nombre" name="nombre" required><br>
+                <label for="text">Apellido: </label>
+                <input type="text" [(ngModel)]="nuevoCliente.apellido" name="apellido" required><br>
+                <label for="id_gestor">Gestor:</label>
+                <select name="id_gestor" [(ngModel)]="nuevoCliente.id_gestor" name="id_gestor">
+                    <option selected disabled value="0">Seleccione una opción:</option>
+                    <option *ngFor="let gestor of gestores" value="{{ gestor.id }}">
+                        {{ gestor.nombre }}
+                    </option>
+                </select><br>
+                <label for="email">Email: </label>
+                <input type="email" [(ngModel)]="nuevoCliente.email" name="email" required><br>
+                <button class="boton" type="submit">Enviar</button>
+            </form>
+        </div>
+        <div class="formulario" *ngIf="formularioActualizar && clienteSeleccionado" >
+            <h3>Modificar Cliente</h3>
+            <form (submit)="actualizarCliente()">
+                <label for="text">Nombre:</label>
+                <input type="text" [(ngModel)]="clienteSeleccionado.nombre" name="nombre" required><br>
+                <label for="text">Apellido: </label>
+                <input type="text" [(ngModel)]="clienteSeleccionado.apellido" name="apellido" required><br>
+                <label for="id_gestor"> Gestor: </label>
+                <select name="id_gestor" [(ngModel)]="clienteSeleccionado.id_gestor.id">
+                    <option *ngFor="let gestor of gestores" value="{{ gestor.id }}">
+                        {{ gestor.nombre }}
+                    </option>
+                </select><br>
+                <label for="email">Email: </label>
+                <input type="email" [(ngModel)]="clienteSeleccionado.email" name="email" required><br>
+                <button class="boton" type="submit">Enviar</button>
+                <button class="boton" (click)="ocultarFormulario()">Cancelar</button>
+            </form>
+        </div>
     </div>
-    
-<div>
-    <h3>Agregar Cliente</h3>
-    <form (submit)="insertarCliente()">
-        <label for="text">Nombre:</label>
-        <input type="text" [(ngModel)]="nuevoCliente.nombre" name="nombre" required><br>
-        <label for="text">Apellido: </label>
-        <input type="text" [(ngModel)]="nuevoCliente.apellido" name="apellido" required><br>
-        <label for="id_gestor">Gestor:</label>
-        <select name="id_gestor" [(ngModel)]="nuevoCliente.id_gestor" name="id_gestor">
-            <option selected disabled value="0">Seleccione una opción:</option>
-            <option *ngFor="let gestor of gestores" value="{{ gestor.id }}">
-                {{ gestor.nombre }}
-            </option>
-        </select><br>
-        <label for="email">Email: </label>
-        <input type="email" [(ngModel)]="nuevoCliente.email" name="email" required><br>
-        <button class="boton" type="submit">Enviar</button>
-    </form>
-</div>
 </div>

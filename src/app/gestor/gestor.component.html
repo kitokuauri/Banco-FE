@@ -42,26 +42,10 @@
             </tr>
         </tbody>
     </table>
-    
-        <div *ngIf="formularioActualizar && gestorSeleccionado" >
-            <h3>Modificar Gestor</h3>
-            <form (submit)="actualizarGestor()">
-                <label for="text">Nombre:</label>
-                <input type="text" [(ngModel)]="gestorSeleccionado.nombre" name="nombre" required><br>
-                <label for="text">Apellido: </label>
-                <input type="text" [(ngModel)]="gestorSeleccionado.apellido" name="apellido" required><br>
-                <label for="edad">Edad:</label>
-                <input type="number" min="18" max="100" [(ngModel)]="gestorSeleccionado.edad" name="edad" required><br>
-                <label for="email">Email: </label>
-                <input type="email" [(ngModel)]="gestorSeleccionado.email" name="email" required><br>
-                <button class="boton" type="submit">Enviar</button>
-                <button class="boton" (click)="ocultarFormulario()">Cancelar</button>
-            </form>
-        </div>
-        
-    <div>
+
+    <div class="formulario">
         <h3>Agregar Gestor</h3>
-        <form (submit)="insertarGestor()">
+        <form class="agregar" (submit)="insertarGestor()">
             <label for="text">Nombre:</label>
             <input type="text" [(ngModel)]="nuevoGestor.nombre" name="nombre" required><br>
             <label for="text">Apellido: </label>
@@ -74,5 +58,20 @@
         </form>
     </div>
     
+    <div class="formulario" *ngIf="formularioActualizar && gestorSeleccionado" >
+        <h3>Modificar Gestor</h3>
+        <form (submit)="actualizarGestor()">
+            <label for="text">Nombre:</label>
+            <input type="text" [(ngModel)]="gestorSeleccionado.nombre" name="nombre" required><br>
+            <label for="text">Apellido: </label>
+            <input type="text" [(ngModel)]="gestorSeleccionado.apellido" name="apellido" required><br>
+            <label for="edad">Edad:</label>
+            <input type="number" min="18" max="100" [(ngModel)]="gestorSeleccionado.edad" name="edad" required><br>
+            <label for="email">Email: </label>
+            <input type="email" [(ngModel)]="gestorSeleccionado.email" name="email" required><br>
+            <button class="boton" type="submit">Enviar</button>
+            <button class="boton" (click)="ocultarFormulario()">Cancelar</button>
+        </form>
+    </div>
 </div>
 
