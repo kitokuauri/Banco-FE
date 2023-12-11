@@ -29,6 +29,7 @@ export class SearchBarComponent  implements OnInit {
       this.gestorService.obtenerGestores().subscribe(datos =>{
         this.gestores = datos;
       });
+      // Cuando el valor de myControl (el input) cambia -> mapear en listaFiltrada el resultado de this._filter();
       this.listaFiltrada = this.myControl.valueChanges.pipe(startWith(''), map(value => this._filter(value || '')));
   }
 

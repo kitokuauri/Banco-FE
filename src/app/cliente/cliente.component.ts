@@ -28,7 +28,7 @@ export class ClienteComponent implements OnInit {
     this.clienteService.obtenerClientes().subscribe(datos =>{
       console.log(datos);
       this.clientes = datos;
-      this.clienteSeleccionado= null;
+      this.clienteSeleccionado = null;
     });
     this.gestorService.obtenerGestores().subscribe(datos =>{
       this.gestores = datos;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GestorService } from '../gestor.service';
 import { Gestor } from './gestor.model';
 import { HttpClient } from '@angular/common/http';
-import { subscribeOn } from 'rxjs';
 import { ConfirmacionComponent } from '../confirmacion/confirmacion.component';
 import { MatDialog } from '@angular/material/dialog';
 declare var $: any;
