@@ -74,6 +74,16 @@ table{
     -webkit-overflow-scrolling: touch;
     border-spacing: 0;
 }
+table tbody tr:hover {
+    color: #2f0f4a;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+thead {
+    background-color: #ffca2c;
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+}
 
 .box {
     width: 80%;
@@ -82,7 +92,7 @@ table{
     margin-right: auto;
     margin-left: auto;
 }
-td, th {
+td {
     text-align: center;
     border-bottom: 2px solid #4a1c73;
 }

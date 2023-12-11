@@ -21,6 +21,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { AvisoLegalComponent } from './aviso-legal/aviso-legal.component';
+import { ExtraComponent } from './extra/extra.component';
 
 
 @NgModule({
@@ -32,7 +36,11 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     TransferenciaComponent,
     DashboardComponent,
     ConfirmacionComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    PageNotFoundComponent,
+    QuienesSomosComponent,
+    AvisoLegalComponent,
+    ExtraComponent
   ],
   imports: [
     BrowserModule,

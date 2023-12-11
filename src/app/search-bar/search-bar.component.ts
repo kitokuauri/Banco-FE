@@ -45,15 +45,15 @@ export class SearchBarComponent  implements OnInit {
 
     for (const cliente of this.clientes) {
       options.push({
-        type:'cliente',
+        type:'Cliente',
         id: cliente.id,
-        nombre: cliente.nombre + '' + cliente.apellido
+        nombre: cliente.nombre + ' ' + cliente.apellido
       });
     }
 
     for (const gestor of this.gestores) {
       options.push({
-        type: 'gestor',
+        type: 'Gestor',
         id: gestor.id,
         nombre: gestor.nombre + ' ' + gestor.apellido,
       });
@@ -63,7 +63,7 @@ export class SearchBarComponent  implements OnInit {
   }
 
   getIconClass(type: string): string {
-    return type === 'cliente' ? "fa-solid fa-user fa-fw" : "fa-solid fa-lemon fa-fw";
+    return type === 'Cliente' ? "fa-solid fa-user fa-fw" : "fa-solid fa-lemon fa-fw";
   }
 
 }

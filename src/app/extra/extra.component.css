@@ -1,0 +1,31 @@
+:host{
+    position: sticky;
+    top: 100%;
+}
+.extra-box {
+    background-color: #616161;
+    color: white;
+    padding: 10px 10% 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+a, h3, p{
+    text-align: left;
+    color: white;
+}
+
+#contacto-box {
+    margin-bottom: 40px;
+}
+
+#nosotros-box a,
+#contacto-box a {
+  display: block; /* Hace que los enlaces ocupen todo el ancho del div */
+}
+img {
+    width: 187px;
+    height: 167px;
+}
