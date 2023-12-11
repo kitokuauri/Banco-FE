@@ -52,9 +52,13 @@ export class GestorComponent implements OnInit {
           this.gestorService.notificarEliminacion();
           this.gestorService.obtenerGestores().subscribe(nuevosDatos => {
             this.gestores = nuevosDatos;
-          })
+          });
+        }, error =>{
+          if (error.status === 404){
+            alert("El gestor seleccionado no se pudo eliminar. ¡Cuidado! Puede que aún tenga clientes asociados.")
+          }
         })
-      }
+      } 
     })
   }
 
