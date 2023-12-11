@@ -65,6 +65,7 @@ export class GestorComponent implements OnInit {
         apellido: this.gestorSeleccionado?.apellido,
         edad: this.gestorSeleccionado?.edad,
         email: this.gestorSeleccionado?.email,
+        salario: this.gestorSeleccionado?.salario
       };
   
       this.gestorService.actualizarGestor(this.gestorSeleccionado?.id || 0, cambios).subscribe(gestorActualizado => {
